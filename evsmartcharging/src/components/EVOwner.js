@@ -1,4 +1,5 @@
 import React,{useState} from 'react';
+import NearbyLocations from './NearbyLocations';
 
 
 const EVOwner = ({state}) => {
@@ -37,6 +38,8 @@ const EVOwner = ({state}) => {
         </label>  
           <button type='submit'>Find</button> 
     </form> 
+
+      <NearbyLocations location={location}/>
           </div> 
   )
 }
