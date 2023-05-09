@@ -30,7 +30,7 @@ const NearbyLocations = ({location}) => {
     <div>
       {LoctoDest.map((eachlocation,index)=>{
         return(
-          <StationDetail location={eachlocation}/>
+          <StationDetail stationdetail={eachlocation}/>
         )
       })};
      </div>

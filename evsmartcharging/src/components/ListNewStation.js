@@ -2,7 +2,7 @@ import React ,{ useState } from 'react'
  
 const ListNewStation = ({state}) => { 
   
-  const [location,setLocation]=useState(); 
+  const [location,setLocation]=useState(''); 
   const getLocation=()=>{ 
     if (navigator.geolocation) { 
       navigator.geolocation.getCurrentPosition((position)=>setLocation(`lat : ${position.coords.latitude} , lon : ${position.coords.longitude}`)); } 
@@ -16,11 +16,11 @@ const ListNewStation = ({state}) => {
     try {
     const transaction=await contract.ListNewStation(voltage,description,location,price);
     await transaction.wait();
-    console.log(transaction);
+    console.log('transaction',transaction);
   } catch (e) {
     console.log(e)
-      // if(e.data.message==='VM Exception while processing transaction: revert Address already present');  //err code : -32603
-      // alert('address already present')
+      if(e.data.message==='VM Exception while processing transaction: revert Address already present');  //err code : -32603
+      alert('address already present')
   }
     
   }
