@@ -1,7 +1,7 @@
 .react_time_range__time_range_container {
 	padding: 30px 10% 0;
 	height: 70px;
-	width: 90%;
+	width: 100vw;
 	box-sizing: border-box;
   }
   .react_time_range__keyboard_handle {
@@ -93,10 +93,11 @@
   .react_time_range__tick_label {
 	position: absolute;
 	margin-top: 28px;
-	font-size: 10px;
+	font-weight: 'bolder';
+	font-size: 15px;
 	text-align: center;
 	z-index: 2;
-	color: #0e2132;
+	color: #000000;
 	font-family: sans-serif;
   }
   
