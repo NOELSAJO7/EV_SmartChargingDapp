@@ -1,0 +1,13 @@
+.ui.segment.Change{
+/* border:2px solid black; */
+box-shadow: 1px 1px 5px #3677AF, -1px -1px 5px #3677AF; 
+
+
+}
+
+.ui.segment.Change:hover {
+    cursor: pointer;
+    box-shadow: 5px 5px 10px rgb(243, 243, 243), -5px -5px 10px rgb(254, 254, 254); 
+    
+    border:2px solid #3677AF;
+  }
