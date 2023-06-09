@@ -1,54 +1,98 @@
-import React ,{ useState } from 'react'
+import React ,{ useState } from 'react';
+import { Form, Button, Segment, Grid } from 'semantic-ui-react';
+import { useSelector } from 'react-redux';
+
  
-const ListNewStation = ({state}) => { 
+const ListNewStation = () => { 
   
+  const contract = useSelector((state)=>state.SetContract);
+  const [accAddress] = useSelector((state)=>state.SetAccount);
+
   const [location,setLocation]=useState(''); 
   const getLocation=()=>{ 
     if (navigator.geolocation) { 
-      navigator.geolocation.getCurrentPosition((position)=>setLocation(`lat : ${position.coords.latitude} , lon : ${position.coords.longitude}`)); } 
+      navigator.geolocation.getCurrentPosition((position)=>setLocation(`${position.coords.latitude},${position.coords.longitude}`)); } 
   else { console.log("Geolocation is not supported by this browser"); } } 
   
   
-  const handleSubmit=async(event)=>{
-    event.preventDefault();
-    const {contract}=state;
-
-    try {
-    const transaction=await contract.ListNewStation(voltage,description,location,price);
-    await transaction.wait();
-    console.log('transaction',transaction);
-  } catch (e) {
-    console.log(e)
-      if(e.data.message==='VM Exception while processing transaction: revert Address already present');  //err code : -32603
-      alert('address already present')
-  }
-    
-  }
-  
   const [description,setDesctription]=useState('');
+  const [stationName,setStationName]=useState('');
   const [price,setPrice]=useState(0);
   const [voltage,setVoltage]=useState(0);
 
 
+  const handleSubmit=async(event)=>{
+    console.log(contract)
+    console.log('price voltage',price,voltage)
+    event.preventDefault();
+    try {
+    const transaction=await contract.ListNewStation(stationName,voltage,description,location,price);
+    await transaction.wait();
+    console.log('transaction',transaction);
+    // navigate('/asstationowner');
+  } catch (e) {
+    console.log(e)
+      // if(e.data.message==='VM Exception while processing transaction: revert Address already present');  //err code : -32603
+      // alert('address already present')
+  }
+    
+  }
+
+
+
   return( 
-  <div>
-    {/* uint8 _wattage,string memory _description,string memory _location,uint256 _price */}
-    <form onSubmit={handleSubmit}>
-      <label>Description: 
-        <input type="text" value={description} onChange={(e)=>{setDesctription(e.target.value)}} required/>
-      </label> 
-      <label>Location: 
-        <input type="text"  value={location} required readOnly /> 
-        <button type='button' onClick={getLocation}>fetch my location</button> 
-        </label> 
-        <label>PricePerMin: <input type="number" value={price} required  onChange={(e)=>{setPrice(e.target.value)}}/> 
-        </label> 
-        <label>Max Voltage: 
-          <input type="number" value={voltage} required onChange={(e)=>{setVoltage(e.target.value)}}/> 
-          </label> 
-          <button type='submit'>Register</button> 
-    </form> 
-          </div> 
+    <Grid textAlign='center' style={{ height: '80vh' }} verticalAlign='middle'>
+    <Grid.Column style={{ maxWidth: 450 }}>
+    <Segment padded='very' textAlign='left'>
+    <Form onSubmit={handleSubmit} >
+    <Form.Input
+      // error={{ content: 'Please enter your first name', pointing: 'below' }}
+      // fluid 
+      label='Name:'
+      placeholder='Station Name'
+      value={stationName} onChange={(e)=>{setStationName(e.target.value)}} 
+      required
+    />
+    <Form.Input
+      // error={{ content: 'Please enter your first name', pointing: 'below' }}
+      // fluid 
+      label='Description:'
+      placeholder='First name'
+      id='form-input-first-name'
+      value={description} onChange={(e)=>{setDesctription(e.target.value)}} 
+      required
+    />
+    <Form.Group>
+    {/* <Segment > */}
+    <Form.Input
+      // error='Please enter your last name'
+      // fluid
+      label='Location:'
+      placeholder='Location'
+      value={location}
+      readOnly
+      required
+    />
+    <Button type='Button' style={{height:'40%',marginTop:'25px'}}primary onClick={getLocation}>Fetch Location</Button>
+    {/* </Segment> */}
+    </Form.Group>
+
+    <Form.Field label='PricePerMin:' control='input' type='number' max={50}   value={price} required onChange={(e)=>{setPrice(e.target.value)}} />
+    
+    <Form.Field label='Max Voltage:' control='input' type='number' max={500} value={voltage} required onChange={(e)=>{setVoltage(e.target.value)}} />
+    
+    <Form.Checkbox
+      label='I agree to the Terms and Conditions'
+      // error={{
+      //   content: 'You must agree to the terms and conditions',
+      //   pointing: 'left',
+      // }}
+    />
+    <Button type='submit' primary onClick={getLocation}>Register</Button>
+  </Form>
+  </Segment>
+  </Grid.Column>
+  </Grid>
           );
           
         } 
