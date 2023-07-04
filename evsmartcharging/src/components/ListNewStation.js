@@ -71,6 +71,7 @@ const ListNewStation = () => {
       placeholder='Location'
       value={location}
       readOnly
+      // onChange={(e)=>{setLocation(e.target.value)}}
       required
     />
     <Button type='Button' style={{height:'40%',marginTop:'25px'}}primary onClick={getLocation}>Fetch Location</Button>
@@ -88,7 +89,7 @@ const ListNewStation = () => {
       //   pointing: 'left',
       // }}
     />
-    <Button type='submit' primary onClick={getLocation}>Register</Button>
+    <Button type='submit' primary >Register</Button>
   </Form>
   </Segment>
   </Grid.Column>

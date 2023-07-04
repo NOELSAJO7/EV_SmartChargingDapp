@@ -91,15 +91,15 @@ useEffect(()=>{
 //   })
 console.log(props.LoctoDest)
 
-  const getActiveStatus = async(somelocation)=>{
-    // console.log('eachloc',somelocation)
-    const station = await contract.locationsToStation(somelocation);
-    // console.log(station.wattage);
-    // setVoltage(station['wattage']);
-    // // setPrice(station['pricePerunit']);
-    // setIsActive(station['isActive']);
-    return [station.wattage,station.pricePerunit];
-  }
+  // const getActiveStatus = async(somelocation)=>{
+  //   // console.log('eachloc',somelocation)
+  //   const station = await contract.locationsToStation(somelocation);
+  //   // console.log(station.wattage);
+  //   // setVoltage(station['wattage']);
+  //   // // setPrice(station['pricePerunit']);
+  //   // setIsActive(station['isActive']);
+  //   return [station.wattage,station.pricePerunit];
+  // }
   return (
     
     <div className='jc'>

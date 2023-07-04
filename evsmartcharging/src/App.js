@@ -30,7 +30,7 @@ function App() {
   // To automatically fetch contract instance
   useEffect(()=>{
     const template=async()=>{
-    const contractAddress="0xb001560921aFCCa0BCEdb03f4F4bEE9013cC5E81";  
+    const contractAddress="0x16B0D9C1b5a1F40386923D3ecE23e1dA2bCFd938";  
     const contractABI=abi.abi;
 
     // metamask part to perform transactions in goerli
@@ -54,7 +54,7 @@ try{
       signer
     )
 
-    // console.log('inside app',contract); // to check the instance
+    console.log('inside app',contract); // to check the instance
 
     setState({provider,signer,contract});
     dispatch(setContract(contract));
